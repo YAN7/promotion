@@ -3,8 +3,8 @@
 - quick start
 
 ``` bash
-git clone https://github.com/wangdahoo/vonic-webpack-starter.git
-cd vonic-webpack-starter
+git clone git@github.com:YAN7/promotion.git
+cd promotion
 npm install -g yarn
 yarn
 ```
@@ -20,3 +20,4 @@ npm run dev
 ```bash
 npm run build
 ```
+
