@@ -7,18 +7,18 @@
 	export default {
 		data() {
 			return {
-
+				
 			}
 		},
 		props: ['text'],
-
 	}
 </script>
 <style lang="scss">
 .button-3d {
   position: relative;
-  width: 140px;
+  width: 32vw;
   height: 39px;
+	overflow: hidden;
   top: 0;
   box-shadow: 0 7px 0 #bbbbbb, 0 8px 3px rgba(0, 0, 0, 0.2);
   font-size: 18px;
