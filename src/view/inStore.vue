@@ -16,9 +16,9 @@
 					<p class="top--commission__money">&yen; 888. <span class="top--commission__decimal">00</span></p>
 	    	</div>
 	    	<div class="top--button">
-					<router-link class="button button-block  top--button__share" to="/">
+					<md-button class="button button-block top--button__share">
 						<label>点击分享 立即推荐</label>
-					</router-link>
+					</md-button>
 	    	</div>
     	</div>
     	<div class="personal-bottom padding">

@@ -16,12 +16,12 @@
 					<p class="top--commission__money">&yen; 888. <span class="top--commission__decimal">00</span></p>
 	    	</div>
 	    	<div class="top--button">
-					<div class="button md-button button-block top--button__withdrawal" @click="withdrawal">
+					<md-button class="button md-button button-block top--button__withdrawal" @click="withdrawal">
 						<label>提现</label>
-					</div>
-					<router-link class="button md-button button-block top--button__share" to="register">
+					</md-button>
+					<md-button class="button md-button button-block top--button__share" @click.native="$router.push('register')">
 						<label>点击分享 立即推荐</label>
-					</router-link>
+					</md-button>
 	    	</div>
     	</div>
     	<div class="personal-bottom padding">

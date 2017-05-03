@@ -8,6 +8,7 @@ import Personal from './view/personal.vue'
 import InStore from './view/inStore.vue'
 import shareRule from './view/shareRule.vue'
 import register from './view/register.vue'
+import loginReturn from './view/loginReturn.vue'
 
 // Routes
 const routes = [
@@ -17,6 +18,7 @@ const routes = [
   { path: '/InStore', component: InStore },
   { path: '/shareRule', component: shareRule },
   { path: '/register', component: register },
+  { path: '/loginReturn', component: loginReturn },
 ]
 
 Vue.use(Vonic.app, {

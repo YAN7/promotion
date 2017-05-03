@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="register--submit">
-        <div class="button button-md button-block submit__btn">注册</div>
+        <md-button class="button button-block submit__btn">注册</md-button>
       </div>
     </div>
   </div>
