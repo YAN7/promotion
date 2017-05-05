@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="page has-navbar" v-nav="{title: '我的推荐', showBackButton: true}">
+  <div class="page">
     <div class="page-content personal ">
     	<div class="personal-top padding">
 	    	<div class="top--head">
@@ -8,15 +8,15 @@
 						医美店家
 					</div>
 					<div class="top--head__refund">
-						<button class="button button-small button-stable button-outline ">店家认证</button>
+						<button @click="$router.push('applyStore')" class="button button-small button-stable button-outline ">店家认证</button>
 					</div>
 	    	</div>
 	    	<div class="top--commission">
 					<p class="top--commission__desc">佣金</p>
-					<p class="top--commission__money">&yen; 888. <span class="top--commission__decimal">00</span></p>
+					<p class="top--commission__money">&yen; 0.<span class="top--commission__decimal">00</span></p>
 	    	</div>
 	    	<div class="top--button">
-					<md-button class="button button-block top--button__share">
+					<md-button class="button button-block top--button__share" @click.native="showShare = true">
 						<label>点击分享 立即推荐</label>
 					</md-button>
 	    	</div>
@@ -25,21 +25,46 @@
 				<div class="bottom--title">
 					<span>推荐记录</span>
 				</div>
-				<div class="bottom--record">
-					<list>
-						<item style="font-size: 16px; color: #333; font-weight: bold;">123 <span class="item-note bottom--record__phone">1223123****123</span></item>
-						<item style="font-size: 16px; color: #333; font-weight: bold;">123 <span class="item-note bottom--record__phone">1223123****123</span></item>
-						<item style="font-size: 16px; color: #333; font-weight: bold;">123 <span class="item-note bottom--record__phone">1223123****123</span></item>
-						<item style="font-size: 16px; color: #333; font-weight: bold;">123 <span class="item-note bottom--record__phone">1223123****123</span></item>
+        <div class="bottom--record">
+					<list v-if="recommendedRecorLists.length > 0">
+						<item v-for="list in recommendedRecorLists" style="font-size: 16px; color: #333; font-weight: bold;">{{list.nickname}}<span class="item-note bottom--record__phone">{{list.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')}}</span></item>
 					</list>
+          <p v-else class="bottom--record__noRecord">暂无推荐记录</p>
 				</div>
     	</div>
+      <!-- 点击提示右上角分享 -->
+      <div class="shareTips" v-show="showShare" @click="showShare = false">
+        <img class="shareTips__img" src="./../../static/img/wechatShareTips.png" alt="">
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import postWithAuth from './../utils/httpRequest';
 export default {
+  data() {
+    return {
+      recommendedRecorLists: [],
+      showShare: false
+    }
+  },
+  mounted() {
+    this.WxSdk.init(1);
+    this.getRecommendedRecord();
+  },
+  methods: {
+    // 推荐记录
+    getRecommendedRecord() {
+      postWithAuth('promote/?method=promoter.distrBindList', {promoter_type: 2}, (re)=> {
+        if (re.state) {
+          this.recommendedRecorLists = re.data.list;
+        } else {
+          $toast.show(re.msg, 500);
+        }
+      }, (re)=> {$toast.show(re.msg, 500)})
+    },
+  }
 }
 </script>
 
@@ -77,7 +102,7 @@ export default {
 			}
 			.top--commission__money {
 				font-size: 40px;
-				font-weight: bold;
+				// font-weight: bold;
 				color: #333;
 				margin-top: 15px;
 			}
@@ -106,7 +131,7 @@ export default {
 		padding-bottom: 0;
 		background-color: #fff !important;
 		.bottom--title {
-			// text-align: center;
+      // text-align: center;
 			height: 51px;
 			color: #999;
 			font-size: 14px;
@@ -114,22 +139,25 @@ export default {
 			justify-content: center;
 			align-items: center;
 			position: relative;
-			z-index： 1；
+			// z-index： 1；
+      // background-color: red;
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-350%,-50%);
+        width: 18px;
+        height: 2px;
+        background-color: #ddd;
+			}
+      &:after {
+        transform: translate(250%,-50%);
+      }
 			span {
 				display: block;
 				position: relative;
-				&:after {
-					content: "";
-					position: absolute;
-					top: 50%;
-					left: 0;
-					background-color: red;
-					width: 16px;
-					height: 2px;
-				}
-			}
-			&:after {
-				// right: 0;
 			}
 		}
 		.bottom--record {
@@ -137,6 +165,28 @@ export default {
 				color: #666;
 				font-size: 16px;
 			}
+      .bottom--record__noRecord {
+        color: #666;
+        height: 40px;
+        text-align: center;
+      }
 		}
 	}
+  .shareTips {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, .4);
+    .shareTips__img {
+      width: 70%;
+      position: absolute;
+      right: 10px;
+      top: 25px;
+    }
+  }
 </style>

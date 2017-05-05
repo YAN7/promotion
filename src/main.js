@@ -1,25 +1,22 @@
-import Vue from 'vue'
-import Vonic from 'vonic'
+import Vue from 'vue';
+import Vonic from 'vonic';
+import VueRouter from 'vue-router'
 
-// Page Components
-import Index from './view/Index.vue'
-import About from './view/About.vue'
-import Personal from './view/personal.vue'
-import InStore from './view/inStore.vue'
-import shareRule from './view/shareRule.vue'
-import register from './view/register.vue'
-import loginReturn from './view/loginReturn.vue'
+import routes from './routes';
+import * as WxSdk from './utils/wechat';
 
-// Routes
-const routes = [
-  { path: '/', component: Index },
-  { path: '/about', component: About },
-  { path: '/personal', component: Personal },
-  { path: '/InStore', component: InStore },
-  { path: '/shareRule', component: shareRule },
-  { path: '/register', component: register },
-  { path: '/loginReturn', component: loginReturn },
-]
+Vue.use(VueRouter);
+Vue.prototype.WxSdk = WxSdk;
+
+const router = new VueRouter({
+    routes: routes
+});
+
+console.log(router);
+// router.beforeEach((to, from, next) => {
+//   console.log(123);
+//   next();
+// })
 
 Vue.use(Vonic.app, {
   routes: routes

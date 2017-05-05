@@ -7,7 +7,7 @@
 	export default {
 		data() {
 			return {
-				
+
 			}
 		},
 		props: ['text'],
@@ -57,7 +57,6 @@
   border-color: #fff55b;
   color: #f9b500;
 }
-
 .button-3d.button-highlight {
   box-shadow: 0 7px 0 #f9b500, 0 8px 3px rgba(0, 0, 0, 0.3);
 }
