@@ -147,7 +147,7 @@ export default {
           display: flex;
           display: -webkit-flex;
           justify-content: center;
-          align-items: cneter;
+          align-items: center;
           &:before {
             content: "";
             position: absolute;
@@ -166,16 +166,16 @@ export default {
         .item-text {
           flex: 1;
           -webkit-flex: 1;
-          -webkit-box-flex: 1;
+          vertical-align: middle;
           input {
-            // background-color: red;
             outline: none;
             width: 100%;
             height: 100%;
+            height: 38px;
             padding: 0;
             padding-left: 10px;
             font-size: 15px;
-            // line-height: normal;
+            line-height: normal;
           }
         }
       }

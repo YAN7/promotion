@@ -91,7 +91,7 @@ export default {
   },
   created() {
     console.log(1);
-    this.getPromoterInfo();
+    // this.getPromoterInfo();
   },
   mounted() {
     // wxLogin();
@@ -101,6 +101,7 @@ export default {
     if (!get("yml_promoter_info") && isWechat) {
       wxLogin();
     }
+    this.getPromoterInfo();
     const yml_promoter_info = get("yml_promoter_info");
     // 获取押金金额
     post('promote/?method=promoter.distrDeposit', {}, (re)=> {
@@ -113,8 +114,8 @@ export default {
     }, (re)=> {$toast.show(re.msg, 500)})
   },
   methods: {
+    // 获取推广员信息
     getPromoterInfo() {
-      // 获取推广员信息
       postWithAuth('promote/?method=promoter.selfinfo', {}, (re)=> {
         if (re.state) {
           this.promoter_type = re.data.promoter_type;
